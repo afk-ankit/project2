@@ -1,24 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import { auth, provider } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { userLogin, userLogout } from './Slices/userSlice';
+import Navbar from './components/Navbar';
+import { Route, Routes } from 'react-router-dom';
+import AuthProvider from './AuthProvider';
 
 function App() {
+
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          userLogin({
+            userName: user.displayName,
+            uid: user.uid
+          })
+        )
+
+      }
+    })
+    return () => {
+      unsub()
+    }
+
+  }, [])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<h1>Home</h1>} />
+        <Route path='/cart' element={<AuthProvider><h1>cart</h1></AuthProvider>} />
+        <Route path='/wishlist' element={<AuthProvider><h1>WishList</h1></AuthProvider>} />
+      </Routes>
+    </div >
   );
 }
 
