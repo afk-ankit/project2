@@ -7,6 +7,8 @@ import { userLogin, userLogout } from './Slices/userSlice';
 import Navbar from './components/Navbar';
 import { Route, Routes } from 'react-router-dom';
 import AuthProvider from './AuthProvider';
+import Product from './components/Product';
+import Wishlist from './components/Wishlist';
 
 function App() {
 
@@ -35,10 +37,11 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path='/' element={<h1>Home</h1>} />
+        <Route path='/' element={<Product />} />
         <Route path='/cart' element={<AuthProvider><h1>cart</h1></AuthProvider>} />
-        <Route path='/wishlist' element={<AuthProvider><h1>WishList</h1></AuthProvider>} />
+        <Route path='/wishlist' element={<AuthProvider><Wishlist /></AuthProvider>} />
       </Routes>
+      {/* <Product /> */}
     </div >
   );
 }
