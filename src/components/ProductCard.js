@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/ProductCard.css'
+import { addToCart } from '../Slices/cartSlice';
 import { addToWishlist, removeFromWishlist } from '../Slices/wishlistSlice';
 function ProductCard({ title, rating, img, price, id }) {
     const [like, setLike] = useState(false)
     const wishlist = useSelector(state => state.wishlistReducer.item)
-
-
+    const cart = useSelector(state => state.cartReducer.item)
+    const user = useSelector(state => state.userReducer.uid)
     useEffect(() => {
         if (wishlist.findIndex(e => e.id === id) >= 0) {
             setLike(true)
@@ -20,33 +21,69 @@ function ProductCard({ title, rating, img, price, id }) {
     const dispatch = useDispatch();
 
     const handleWishlist = () => {
-        if (!like) {
-            dispatch(addToWishlist({
-                id,
-                title,
-                rating,
-                img,
-                price
-            }))
-            toast.success('Item added to wishlist', {
+        if (user) {
+            if (!like) {
+                dispatch(addToWishlist({
+                    id,
+                    title,
+                    rating,
+                    img,
+                    price
+                }))
+                toast.success('Item added to wishlist', {
+                    duration: 800,
+                })
+            }
+
+            else {
+                dispatch(removeFromWishlist({
+                    title,
+                    rating,
+                    img,
+                    price,
+                    id
+                }))
+                toast.error('Item removed from wishlist', {
+                    duration: 800
+                })
+            }
+        }
+        else {
+            toast("Please Login First", {
+                id: 'clipboard',
                 duration: 800
             })
         }
 
-        else {
-            dispatch(removeFromWishlist({
+    }
+
+
+    const handleCart = () => {
+        if (user) {
+            // if (cart?.findIndex(e => e.id === id) >= 0) {
+            //     toast('item Already in Cart')
+            // }
+            // else {
+            dispatch(addToCart({
                 title,
                 rating,
                 img,
                 price,
                 id
             }))
-            toast.error('Item removed from wishlist', {
+            toast.success('Item added to Cart', {
+                duration: 800
+            })
+            // }
+        }
+        else {
+            toast("Please Login First", {
+                id: 'clipboard',
                 duration: 800
             })
         }
-    }
 
+    }
 
     return (
         <div className='ProductCard'>
@@ -65,7 +102,7 @@ function ProductCard({ title, rating, img, price, id }) {
                 </div>
                 <div className='productCard__button'>
 
-                    <button>Add to Cart</button>
+                    <button onClick={handleCart}>Add to Cart</button>
 
                 </div>
             </div>

@@ -1,0 +1,20 @@
+.Cart {
+    padding: 0 5rem;
+    color: var(--color-dark);
+}
+
+.cart__container {
+    display: flex;
+    gap: 2rem;
+}
+
+.cart__items {
+    flex: 0.7;
+}
+
+.cart__total {
+    height: 20rem;
+    padding: 2rem;
+    flex: 0.3;
+    box-shadow: 4px 4px 11px -3px rgba(0, 0, 0, 0.25);
+}

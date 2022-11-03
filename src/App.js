@@ -10,6 +10,7 @@ import AuthProvider from './AuthProvider';
 import Product from './components/Product';
 import Wishlist from './components/Wishlist';
 import { Toaster } from 'react-hot-toast';
+import Cart from './components/Cart';
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Product />} />
-        <Route path='/cart' element={<AuthProvider><h1>cart</h1></AuthProvider>} />
+        <Route path='/cart' element={<AuthProvider><Cart /></AuthProvider>} />
         <Route path='/wishlist' element={<AuthProvider><Wishlist /></AuthProvider>} />
       </Routes>
       {/* <Product /> */}

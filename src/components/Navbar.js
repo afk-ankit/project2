@@ -43,7 +43,11 @@ function Navbar() {
             <NavLink to={'/'} className="navbar__logo" >
                 <p>www.aktraders.in</p>
             </NavLink>
-            <div className="navbar__items-container">
+            <div className="navbar__items-container" style={!user.uid ? {
+                justifyContent: "flex-end"
+            } : {
+                justifyContent: "space-between"
+            }}>
                 {user.uid && <>
                     <NavLink to={'/cart'} className='navbar__items' style={handleStyle}>
                         <i className="bi bi-cart-fill"></i>
@@ -56,10 +60,11 @@ function Navbar() {
                 </>}
 
 
-                {!user.uid && <button onClick={handleLogin} className="navbar__button">Login</button>}
+                {!user.uid && <button onClick={handleLogin} className="navbar__button" > Login</button>}
 
 
-                {user.uid && <button onClick={handleLogout} className="navbar__button">Logout</button>}
+                {user.uid && <button onClick={handleLogout} className="navbar__button"
+                >Logout</button>}
 
             </div >
         </div >
