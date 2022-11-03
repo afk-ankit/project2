@@ -1,13 +1,14 @@
 import { useSelector } from 'react-redux'
 import '../css/Wishlist.css'
+import WishlistItem from './WishlistItem'
 
 function Wishlist() {
 
     const wishlist = useSelector(state => state.wishlistReducer.item)
     return (
-        <div>
-            <h1>Welcome to wishlist</h1>
-            {wishlist?.map(e => <h1 key={e.id}>{e.title}</h1>)}
+        <div className='Wishlist'>
+            <h1 className='product__heading'>WISH LIST</h1>
+            {wishlist?.map(e => <WishlistItem key={e.id} title={e.title} price={e.price} rating={e.rating} img={e.img} />)}
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/ProductCard.css'
 import { addToWishlist, removeFromWishlist } from '../Slices/wishlistSlice';
@@ -8,7 +9,7 @@ function ProductCard({ title, rating, img, price, id }) {
 
 
     useEffect(() => {
-        if (wishlist.findIndex(e => e.id == id) >= 0) {
+        if (wishlist.findIndex(e => e.id === id) >= 0) {
             setLike(true)
         }
         else {
@@ -19,7 +20,7 @@ function ProductCard({ title, rating, img, price, id }) {
     const dispatch = useDispatch();
 
     const handleWishlist = () => {
-        if (!like)
+        if (!like) {
             dispatch(addToWishlist({
                 id,
                 title,
@@ -27,6 +28,11 @@ function ProductCard({ title, rating, img, price, id }) {
                 img,
                 price
             }))
+            toast.success('Item added to wishlist', {
+                duration: 800
+            })
+        }
+
         else {
             dispatch(removeFromWishlist({
                 title,
@@ -35,7 +41,9 @@ function ProductCard({ title, rating, img, price, id }) {
                 price,
                 id
             }))
-
+            toast.error('Item removed from wishlist', {
+                duration: 800
+            })
         }
     }
 

@@ -1,4 +1,3 @@
-import { async } from "@firebase/util"
 import { signInWithPopup, signOut } from "firebase/auth"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
@@ -26,19 +25,31 @@ function Navbar() {
             alert(error.message)
         }
     }
+
+    const handleStyle = ({ isActive }) => {
+        if (isActive)
+            return {
+                color: "var(--color-accent)"
+            }
+        else
+            return {
+                color: "white"
+            }
+    }
+
     const user = useSelector(state => state.userReducer)
     return (
         <div className="Navbar">
-            <NavLink to={'/'} className="navbar__logo">
-                <p>www.trendsetter.in</p>
+            <NavLink to={'/'} className="navbar__logo" >
+                <p>www.aktraders.in</p>
             </NavLink>
             <div className="navbar__items-container">
                 {user.uid && <>
-                    <NavLink to={'/cart'} className='navbar__items'>
+                    <NavLink to={'/cart'} className='navbar__items' style={handleStyle}>
                         <i className="bi bi-cart-fill"></i>
                         <p>Cart</p>
                     </NavLink>
-                    <NavLink to={'/wishlist'} className='navbar__items'>
+                    <NavLink to={'/wishlist'} className='navbar__items' style={handleStyle}>
                         <i className="bi bi-heart-fill" ></i>
                         <p>Wishlist</p>
                     </NavLink>

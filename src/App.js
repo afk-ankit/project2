@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 import AuthProvider from './AuthProvider';
 import Product from './components/Product';
 import Wishlist from './components/Wishlist';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster />
       <Navbar />
       <Routes>
         <Route path='/' element={<Product />} />
