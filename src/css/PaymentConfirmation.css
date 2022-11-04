@@ -10,6 +10,26 @@
     z-index: 80;
 }
 
+.paymentConfirmation__button {
+    border-radius: 1rem;
+    margin: auto;
+    width: fit-content;
+    margin-top: 1rem;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-dark);
+    text-decoration: none;
+    color: white;
+}
+
+.paymentConfirmation__container>div {
+    align-items: center;
+    display: flex;
+}
+
 .lds-facebook {
     display: inline-block;
     position: relative;
