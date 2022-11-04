@@ -11,10 +11,11 @@ import Product from './components/Product';
 import Wishlist from './components/Wishlist';
 import { Toaster } from 'react-hot-toast';
 import Cart from './components/Cart';
+import Loader from './components/Loader';
 
 function App() {
 
-
+  const loading = useSelector(state => state.loaderReducer.load)
   const dispatch = useDispatch()
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <div className="App">
+      {loading && <Loader />}
       <Toaster />
       <Navbar />
       <Routes>

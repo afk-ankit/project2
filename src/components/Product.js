@@ -1,13 +1,33 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
 import '../css/Product.css'
+import { changeLoad } from '../Slices/loaderSlice'
 import ProductCard from './ProductCard'
 
 function Product() {
+    const dispatch = useDispatch()
     useEffect(() => {
         const getData = async () => {
-            const result = await axios('https://fakestoreapi.com/products');
-            setItem(result.data)
+            try {
+                dispatch(changeLoad({
+                    load: true
+                }))
+                const result = await axios('https://fakestoreapi.com/products');
+                setItem(result.data)
+                dispatch(changeLoad({
+                    load: false
+                }))
+            } catch (error) {
+                dispatch(changeLoad({
+                    load: false
+                }))
+                toast.error(error.message, {
+                    id: "clipboard"
+                })
+            }
+
         }
         getData();
 
@@ -16,6 +36,7 @@ function Product() {
     const [item, setItem] = useState([])
     return (
         <div className='Product'>
+
             <h1 className='product__heading'>PRODUCTS</h1>
             <div className='product__grid'>
                 {item.map(e =>

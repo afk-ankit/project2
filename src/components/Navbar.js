@@ -4,24 +4,43 @@ import { NavLink } from "react-router-dom"
 import { auth, provider } from "../firebase"
 import { userLogout } from "../Slices/userSlice"
 import '../css/Navbar.css'
+import { changeLoad } from "../Slices/loaderSlice"
+import toast from "react-hot-toast"
 function Navbar() {
     const dispatch = useDispatch();
     const handleLogin = async () => {
         try {
+            dispatch(changeLoad({
+                load: true
+            }))
             await signInWithPopup(auth, provider)
-
+            dispatch(changeLoad({
+                load: false
+            }))
+            toast.success("User logged in successfully")
         } catch (error) {
-            alert(error.message)
+            dispatch(changeLoad({
+                load: false
+            }))
+            toast.error(error.message)
         }
     }
 
     const handleLogout = async () => {
         try {
-
+            dispatch(changeLoad({
+                load: true
+            }))
             await signOut(auth)
             dispatch(userLogout())
-
+            dispatch(changeLoad({
+                load: false
+            }))
+            toast.success("User logged out successfully")
         } catch (error) {
+            dispatch(changeLoad({
+                load: false
+            }))
             alert(error.message)
         }
     }
