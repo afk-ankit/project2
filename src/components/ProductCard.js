@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/ProductCard.css'
 import { addToCart } from '../Slices/cartSlice';
+import { changeModal } from '../Slices/modalSlice';
 import { addToWishlist, removeFromWishlist } from '../Slices/wishlistSlice';
 function ProductCard({ title, rating, img, price, id }) {
     const [like, setLike] = useState(false)
@@ -49,10 +50,9 @@ function ProductCard({ title, rating, img, price, id }) {
             }
         }
         else {
-            toast("Please Login First", {
-                id: 'clipboard',
-                duration: 800
-            })
+            dispatch(changeModal({
+                load: true
+            }))
         }
 
     }
@@ -60,10 +60,7 @@ function ProductCard({ title, rating, img, price, id }) {
 
     const handleCart = () => {
         if (user) {
-            // if (cart?.findIndex(e => e.id === id) >= 0) {
-            //     toast('item Already in Cart')
-            // }
-            // else {
+
             dispatch(addToCart({
                 title,
                 rating,
@@ -74,13 +71,12 @@ function ProductCard({ title, rating, img, price, id }) {
             toast.success('Item added to Cart', {
                 duration: 800
             })
-            // }
+
         }
         else {
-            toast("Please Login First", {
-                id: 'clipboard',
-                duration: 800
-            })
+            dispatch(changeModal({
+                load: true
+            }))
         }
 
     }

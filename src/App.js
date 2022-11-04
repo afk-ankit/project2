@@ -1,4 +1,5 @@
 import './App.css';
+import ReactDom from 'react-dom'
 import { auth, provider } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,10 +13,12 @@ import Wishlist from './components/Wishlist';
 import { Toaster } from 'react-hot-toast';
 import Cart from './components/Cart';
 import Loader from './components/Loader';
+import LoginModal from './components/LoginModal';
 
 function App() {
 
   const loading = useSelector(state => state.loaderReducer.load)
+  const modal = useSelector(state => state.modalReducer.load)
   const dispatch = useDispatch()
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -38,7 +41,8 @@ function App() {
 
   return (
     <div className="App">
-      {loading && <Loader />}
+      {modal && ReactDom.createPortal(<LoginModal />, document.getElementById('modal'))}
+      {loading && ReactDom.createPortal(< Loader />, document.getElementById('modal'))}
       <Toaster />
       <Navbar />
       <Routes>

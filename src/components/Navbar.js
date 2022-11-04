@@ -6,6 +6,8 @@ import { userLogout } from "../Slices/userSlice"
 import '../css/Navbar.css'
 import { changeLoad } from "../Slices/loaderSlice"
 import toast from "react-hot-toast"
+import { removeAllCart } from "../Slices/cartSlice"
+import { removeAllWishlist } from "../Slices/wishlistSlice"
 function Navbar() {
     const dispatch = useDispatch();
     const handleLogin = async () => {
@@ -36,6 +38,8 @@ function Navbar() {
             dispatch(changeLoad({
                 load: false
             }))
+            dispatch(removeAllCart())
+            dispatch(removeAllWishlist())
             toast.success("User logged out successfully")
         } catch (error) {
             dispatch(changeLoad({
