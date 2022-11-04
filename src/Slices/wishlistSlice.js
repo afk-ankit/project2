@@ -16,7 +16,7 @@ const wishlistSlice = createSlice({
         },
         removeFromWishlist(state, action) {
             const index = state.item.findIndex((e) => {
-                return e.id == action.payload.id
+                return e.id === action.payload.id
             })
             state.item.splice(index, 1)
         },

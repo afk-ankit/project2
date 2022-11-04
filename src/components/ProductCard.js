@@ -33,6 +33,7 @@ function ProductCard({ title, rating, img, price, id }) {
                 }))
                 toast.success('Item added to wishlist', {
                     duration: 800,
+                    id: "clipboard"
                 })
             }
 
@@ -69,7 +70,8 @@ function ProductCard({ title, rating, img, price, id }) {
                 id
             }))
             toast.success('Item added to Cart', {
-                duration: 800
+                duration: 800,
+                id: "clipboard"
             })
 
         }

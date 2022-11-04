@@ -14,6 +14,8 @@ import { Toaster } from 'react-hot-toast';
 import Cart from './components/Cart';
 import Loader from './components/Loader';
 import LoginModal from './components/LoginModal';
+import Payment from './components/Payment';
+import PaymentConfirmation from './components/PaymentConfirmation';
 
 function App() {
 
@@ -49,6 +51,8 @@ function App() {
         <Route path='/' element={<Product />} />
         <Route path='/cart' element={<AuthProvider><Cart /></AuthProvider>} />
         <Route path='/wishlist' element={<AuthProvider><Wishlist /></AuthProvider>} />
+        <Route path='/payment' element={<AuthProvider><Payment /></AuthProvider>} />
+        <Route path='/paymentConfirmation' element={<PaymentConfirmation />} />
       </Routes>
       {/* <Product /> */}
     </div >
