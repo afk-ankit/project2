@@ -1,9 +1,13 @@
 import '../css/PaymentConfirmation.css'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { removeAllCart } from '../Slices/cartSlice'
 
 function PaymentConfirmation() {
     const [resolve, setResolve] = useState(null)
+    const dispatch = useDispatch()
     useEffect(() => {
 
         setTimeout(() => {
@@ -12,6 +16,19 @@ function PaymentConfirmation() {
 
 
     }, [])
+
+    if (resolve === 1) {
+        toast.success('Payment successfull', {
+            id: 'clipboard'
+        })
+        dispatch(removeAllCart())
+    }
+    else if (resolve === 0) {
+        toast.error("Payment unsuccessfull", {
+            id: 'clipboard'
+        })
+    }
+
 
     console.log(resolve)
     return (
@@ -22,35 +39,10 @@ function PaymentConfirmation() {
                 <p>Please don't close the tab payment is processing</p> </> : <></>}
 
 
-            {resolve === 1 && <div className='paymentConfirmation__container'>
-                <div>
-                    <i className="bi bi-check-circle-fill" style={{
-                        marginRight: "1rem",
-                        fontSize: "2rem",
-                        color: "green"
-                    }}>
-
-                    </i>
-                    <h3>Payment successfull</h3>
-                </div>
-                <Link to="/" className='paymentConfirmation__button'>Go Home</Link>
-
-            </div>}
+            {resolve === 1 && <Navigate to='/' />}
 
 
-            {resolve === 0 && <div className='paymentConfirmation__container'>
-                <div>
-                    <i class="bi bi-x-circle-fill" style={{
-                        marginRight: "1rem",
-                        fontSize: "2rem",
-                        color: "red"
-                    }}>
-
-                    </i>
-                    <h3>Payment unsucsessfull</h3>
-                </div>
-                <Link to="/" className='paymentConfirmation__button'>Go Home</Link>
-            </div>}
+            {resolve === 0 && <Navigate to='/cart' />}
 
         </div>
     )

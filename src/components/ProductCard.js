@@ -71,7 +71,7 @@ function ProductCard({ title, rating, img, price, id }) {
             }))
             toast.success('Item added to Cart', {
                 duration: 800,
-                id: "clipboard"
+
             })
 
         }
