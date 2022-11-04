@@ -16,7 +16,8 @@ function PaymentConfirmation() {
             {resolve === null ? <>
                 <div className="lds-facebook"><div></div><div></div><div></div></div>
                 <p>Please don't close the tab payment is processing</p> </> : <></>}
-            {resolve === 1 && <h3>Payment successfull</h3>}{resolve === 0 && <h3>Payment unsucsessfull</h3>}
+            {resolve === 1 && <h3>Payment successfull</h3>}
+            {resolve === 0 && <h3>Payment unsucsessfull</h3>}
         </div>
     )
 }
