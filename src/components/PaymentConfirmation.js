@@ -1,11 +1,12 @@
 import '../css/PaymentConfirmation.css'
 import React, { useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { removeAllCart } from '../Slices/cartSlice'
 
 function PaymentConfirmation() {
+
     const [resolve, setResolve] = useState(null)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -13,8 +14,6 @@ function PaymentConfirmation() {
         setTimeout(() => {
             setResolve(Math.floor(Math.random() * 2))
         }, 3000)
-
-
     }, [])
 
     if (resolve === 1) {

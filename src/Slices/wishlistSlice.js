@@ -20,7 +20,7 @@ const wishlistSlice = createSlice({
             })
             state.item.splice(index, 1)
         },
-        removeAllWishlist(state, action) {
+        removeAllWishlist(state) {
             state.item = []
         }
     }

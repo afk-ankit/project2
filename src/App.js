@@ -52,7 +52,7 @@ function App() {
         <Route path='/cart' element={<AuthProvider><Cart /></AuthProvider>} />
         <Route path='/wishlist' element={<AuthProvider><Wishlist /></AuthProvider>} />
         <Route path='/payment' element={<AuthProvider><Payment /></AuthProvider>} />
-        <Route path='/paymentConfirmation' element={<PaymentConfirmation />} />
+        <Route path='/paymentConfirmation' element={<AuthProvider><PaymentConfirmation /></AuthProvider>} />
       </Routes>
       {/* <Product /> */}
     </div >
